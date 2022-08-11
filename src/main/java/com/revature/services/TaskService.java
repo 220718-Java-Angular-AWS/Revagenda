@@ -24,6 +24,18 @@ public class TaskService {
         return dao.readAll();
     }
 
+    public List<Task> getTasksForUser(Integer userId) {
+        List<Task> taskList = dao.readAll();
+
+        for(Task task : taskList) {
+            if(!task.getUserId().equals(userId)) {
+                taskList.remove(task);
+            }
+        }
+
+        return taskList;
+    }
+
     public void updateTask(Task task) {
         dao.update(task);
     }
@@ -31,4 +43,7 @@ public class TaskService {
     public void deleteTask(int id) {
         dao.delete(id);
     }
+
+
+
 }

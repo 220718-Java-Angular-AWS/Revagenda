@@ -13,6 +13,7 @@ public class UserService {
     }
 
     public void saveUser(User user) {
+        //validation logic here
         dao.create(user);
     }
 

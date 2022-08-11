@@ -3,10 +3,7 @@ package com.revature.daos;
 import com.revature.pojos.User;
 import com.revature.services.DatasourceService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,14 +20,18 @@ public class UserDAO implements DatasourceCRUD<User>{
     public void create(User user) {
         try {
             String sql = "INSERT INTO users (user_name, email, password) VALUES (?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
 
             pstmt.executeUpdate();
 
-
+            ResultSet keys = pstmt.getGeneratedKeys();
+            if(keys.next()) {
+                Integer key = keys.getInt("user_id");
+                user.setUserId(key);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

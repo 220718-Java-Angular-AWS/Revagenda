@@ -38,6 +38,19 @@
     </servlet>
 
 
+    <!-- CORS FILTER -->
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>com.revature.servlets.CORSFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- /CORS FILTER -->
+
+
     <servlet-mapping>
         <servlet-name>taskServlet</servlet-name>
         <url-pattern>/tasks</url-pattern>
@@ -46,6 +59,23 @@
     <servlet>
         <servlet-name>taskServlet</servlet-name>
         <servlet-class>com.revature.servlets.TaskServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+
+    <error-page>
+        <exception-type>com.revature.exceptions.AccessDeniedException</exception-type>
+        <location>/errorHandler</location>
+    </error-page>
+
+    <servlet-mapping>
+        <servlet-name>errorHandlerServlet</servlet-name>
+        <url-pattern>/errorHandler</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>errorHandlerServlet</servlet-name>
+        <servlet-class>com.revature.servlets.ErrorHandlerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 

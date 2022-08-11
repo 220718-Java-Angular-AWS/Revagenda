@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Scanner;
 
 public class UserServlet extends HttpServlet {
     UserService service;
@@ -68,6 +65,8 @@ public class UserServlet extends HttpServlet {
 
         User newUser = mapper.readValue(json, User.class);
         service.saveUser(newUser);
+
+        resp.setStatus(200);
     }
 
     @Override
