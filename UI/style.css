@@ -1,0 +1,18 @@
+body {
+    background-color: powderblue;
+}
+
+.main {
+    text-align: center;
+}
+
+.hi {
+    color: #009900;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#greeting {
+    font-style: bold;
+    font-size: 20px;
+}

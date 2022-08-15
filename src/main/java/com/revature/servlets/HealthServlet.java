@@ -19,4 +19,7 @@ public class HealthServlet extends HttpServlet {
 
         throw new AccessDeniedException("Test this exception for error handling");
     }
+
+
+
 }

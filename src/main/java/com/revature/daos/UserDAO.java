@@ -1,5 +1,6 @@
 package com.revature.daos;
 
+import com.revature.exceptions.AccessDeniedException;
 import com.revature.pojos.User;
 import com.revature.services.DatasourceService;
 
@@ -118,5 +119,36 @@ public class UserDAO implements DatasourceCRUD<User>{
         }
 
 
+    }
+
+
+    public User authenticate(String username, String password) {
+        User user = new User();
+
+        try {
+            String sql = "SELECT * FROM users WHERE user_name = ? AND password = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            ResultSet results = pstmt.executeQuery();
+
+            if(results.next()) {
+                user.setUserId(results.getInt("user_id"));
+                user.setUsername(results.getString("user_name"));
+                user.setEmail(results.getString("email"));
+                user.setPassword(results.getString("password"));
+
+            } else {
+                throw new AccessDeniedException("Access denied!");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return user;
     }
 }

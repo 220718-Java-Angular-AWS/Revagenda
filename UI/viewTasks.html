@@ -1,18 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- This is boilerplate HTML header stuff -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Tasks</title>
+    <style>
+        .task {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .taskHeading {
+            font-weight: bold;
+        }
+
+        .taskLine {
+            font-style: italic;
+        }
+
+        #taskList {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+    </style>
 </head>
 
 <!-- We will have a very small html body for this page, it's basically empty with a palceholder we will use to 
 add our data to. We give the <div> element an id attribute so that we can find the element in the DOM later.
 We want to use this element to add new HTML into the document, the content that comes back from our fetch() request-->
+
 <body>
     <div id="taskList"></div>
+
 </body>
 
 <!-- And now the script portion where we can write our javascript code -->
@@ -39,7 +66,7 @@ We want to use this element to add new HTML into the document, the content that 
         });
 
         //parse the JSON in that response
-        let array = await response.json();
+        let array = response.json();
 
         //get the element where we will place our content
         let htmlElement = document.getElementById('taskList');
@@ -50,9 +77,12 @@ We want to use this element to add new HTML into the document, the content that 
 
 
             //insert into the web page the data
-            htmlElement.innerHTML += "<h4>Title: " + task.title + "</h4>";
-            htmlElement.innerHTML += "<p>Message: " + task.message + "</p>";
-            htmlElement.innerHTML += "<p>Completed: " + task.completed + "</p><br><br>";
+            htmlElement.innerHTML += '<div id="task' + i + '">';
+            let taskElement = document.getElementById('task' + i);
+            taskElement.innerHTML += '<div class="taskHeading"> Title: ' + task.title + '</div>';
+            taskElement.innerHTML += '<div class="taskLine"> Message: ' + task.message + '</div>';
+            taskElement.innerHTML += '<div class="taskLine"> Completed: ' + task.completed + '</div>';
+            htmlElement.innerHTML += '</div>';
 
             /* Our array contains all of the task objects sent back from the API in response to our request. 
             As we loop through it we create and insert content into the body of our HTML document above. When we 
@@ -66,6 +96,11 @@ We want to use this element to add new HTML into the document, the content that 
 
 
     })(1);//This is the part of the IIFE expression where we give it the parameter "1" and invoke the function.
+
+
+    (function otherFunction() {
+        console.log("hello");
+    })();
 
 
 </script>

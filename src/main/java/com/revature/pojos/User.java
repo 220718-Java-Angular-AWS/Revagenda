@@ -1,6 +1,10 @@
 package com.revature.pojos;
 
+
 import java.util.Objects;
+
+
+
 
 public class User {
     private Integer userId;
@@ -17,6 +21,7 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
 
     public User(String username, String email, String password) {
         this.username = username;
@@ -56,6 +61,7 @@ public class User {
         this.password = password;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,7 +77,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "{" +
+        return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +

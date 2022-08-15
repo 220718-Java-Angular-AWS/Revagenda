@@ -32,4 +32,8 @@ public class UserService {
     public void deleteUser(int id) {
         dao.delete(id);
     }
+
+    public User authenticate(String username, String password) {
+        return dao.authenticate(username, password);
+    }
 }

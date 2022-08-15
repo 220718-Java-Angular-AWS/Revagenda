@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <label>Username: </label>
+    <input type="text" id="username" name="username" />
+    <br>
+    <label>Password: </label>
+    <input type="password" id="password" name="password" />
+    <button onclick="auth()">Login</button>
+
+
+</body>
+<script>
+    async function auth() {
+        let user = {
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+        }
+        let url = 'http://localhost:8080/Revagenda/auth';
+
+        /*This is the actual HTTP request code. We use the await keyword to indicate that this funciton may not 
+        complete immedately (synchronously) so we may need to wait for the results to become available. We will 
+        learn more about how this works later. 
+
+        Our URL is the first parameter in the fetch() call. The second is a java object representing the rest of 
+        the necessary HTTP request info, like the method, headers, and body.
+        */
+        let response = await fetch(url, {
+            //this code block is all the second parameter for fetch()
+            method: 'POST',
+            credentials: 'include',
+            // headers: {
+            //     //nested within the object is another, this one is the headers for the request
+            //     'Content-Type': 'application/json;charset=utf-8'
+            // },
+            //and now we stringify our user object into a json string which makes up the body of our request.
+            body: JSON.stringify(user)
+        });
+
+        console.log("response: ", response);
+        console.log("header: ", response.headers.get("JWT"));
+        //for now let's pretend that we got our value back in the header, what do we do with it?
+
+        localStorage.setItem("JWT", /*response.headers.get("JWT")*/1);
+
+        //later we would pick it back up from localstorage and add it as a header in a request
+        let jwt = localStorage.getItem("JWT");
+
+    }
+</script>
+
+</html>
