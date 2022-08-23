@@ -1,7 +1,7 @@
 package com.revature.services;
 
 import com.revature.daos.TaskDAO;
-import com.revature.pojos.Task;
+import com.revature.entities.Task;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class TaskService {
         List<Task> taskList = dao.readAll();
 
         for(Task task : taskList) {
-            if(!task.getUserId().equals(userId)) {
+            if(!task.getUser().getUserId().equals(userId)) {
                 taskList.remove(task);
             }
         }

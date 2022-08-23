@@ -1,7 +1,7 @@
 package com.revature.services;
 
 import com.revature.daos.UserDAO;
-import com.revature.pojos.User;
+import com.revature.entities.User;
 
 import java.util.List;
 

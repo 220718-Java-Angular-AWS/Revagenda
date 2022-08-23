@@ -1,7 +1,7 @@
 package com.revature.daos;
 
 import com.revature.exceptions.AccessDeniedException;
-import com.revature.pojos.User;
+import com.revature.entities.User;
 import com.revature.services.DatasourceService;
 
 import java.sql.*;

@@ -1,16 +1,34 @@
-package com.revature.pojos;
+package com.revature.entities;
 
 
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 
 
-
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
+
+    @Column
     private String username;
+
+    @Column
     private String email;
+
+    @Column
     private String password;
+
+    //build a foreign key relation
+    //@Column?
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks;
 
     public User() {
     }

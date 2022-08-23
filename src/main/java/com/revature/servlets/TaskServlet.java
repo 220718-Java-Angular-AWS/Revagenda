@@ -1,8 +1,7 @@
 package com.revature.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.pojos.Task;
-import com.revature.pojos.User;
+import com.revature.entities.Task;
 import com.revature.services.TaskService;
 
 import javax.servlet.ServletException;

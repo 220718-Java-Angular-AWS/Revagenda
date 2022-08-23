@@ -1,6 +1,6 @@
 package com.revature.daos;
 
-import com.revature.pojos.Task;
+import com.revature.entities.Task;
 import com.revature.services.DatasourceService;
 
 import java.sql.Connection;
@@ -25,7 +25,7 @@ public class TaskDAO implements DatasourceCRUD<Task>{
 
             pstmt.setString(1, task.getTitle());
             pstmt.setString(2, task.getMessage());
-            pstmt.setInt(3, task.getUserId());
+            pstmt.setInt(3, task.getUser().getUserId());
 
             pstmt.executeUpdate();
 
@@ -49,7 +49,7 @@ public class TaskDAO implements DatasourceCRUD<Task>{
                 task.setTaskId(results.getInt("task_id"));
                 task.setTitle(results.getString("title"));
                 task.setMessage(results.getString("message"));
-                task.setUserId(results.getInt("user_id"));
+                task.getUser().setUserId(results.getInt("user_id"));
                 task.setCompleted(results.getBoolean("completed"));
             }
 
@@ -77,7 +77,7 @@ public class TaskDAO implements DatasourceCRUD<Task>{
                 task.setTaskId(results.getInt("task_id"));
                 task.setTitle(results.getString("title"));
                 task.setMessage(results.getString("message"));
-                task.setUserId(results.getInt("user_id"));
+                task.getUser().setUserId(results.getInt("user_id"));
                 task.setCompleted(results.getBoolean("completed"));
                 taskList.add(task);
             }
@@ -97,7 +97,7 @@ public class TaskDAO implements DatasourceCRUD<Task>{
 
             pstmt.setString(1, task.getTitle());
             pstmt.setString(2, task.getMessage());
-            pstmt.setInt(3, task.getUserId());
+            pstmt.setInt(3, task.getUser().getUserId());
             pstmt.setBoolean(4, task.getCompleted());
             pstmt.setInt(5, task.getTaskId());
 
