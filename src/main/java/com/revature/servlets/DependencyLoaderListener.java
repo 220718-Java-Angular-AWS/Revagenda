@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import com.revature.entities.*;
+import com.revature.services.ServiceLocator;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -17,6 +18,7 @@ public class DependencyLoaderListener implements ServletContextListener {
         configuration.addAnnotatedClass(User.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
+        ServiceLocator.setSessionFactory(sessionFactory);
 
         System.out.println("Servlet context initialized!");
     }
